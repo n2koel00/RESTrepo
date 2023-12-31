@@ -1,8 +1,9 @@
+/**Koko koodi REST tehtävää */
 import React, { createContext, useContext, useState } from "react";
 
 const CurrencyContext = createContext();
 
-/**Component makes a context provider for the currency app*/
+/**Komponentti tekee context providerin valuuttavalinta sovellukselle*/
 
 export const CurrencySelection = ({ children }) => {
   const [selectedCurrency, setSelectedCurrency] = useState("eur");
@@ -20,7 +21,7 @@ export const CurrencySelection = ({ children }) => {
   );
 };
 
-/**React hook so the code can be imported*/
+/**React hook jotta koodi voidaan viedä muualle*/
 export const useCurrency = () => {
   const context = useContext(CurrencyContext);
   if (!context) {

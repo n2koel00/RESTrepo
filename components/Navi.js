@@ -7,8 +7,10 @@ import { jwtToken } from '../components/signals/TokenSignal'; // Tuodaan mukanaa
 import axios from 'axios'
 import './navi.css';
 import { useNavigate } from 'react-router-dom';
+/**REST tehtävän koodia */
 import { useCurrency } from './CurrencyContext';
 import Dropdown from 'react-bootstrap/Dropdown';
+/**REST tehtävän koodia */
 
 export const Navi = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -34,10 +36,14 @@ export const Navi = () => {
 
   const isLoggedIn = jwtToken.value.length !== 0;
   const isAdmin = userInfo?.is_admin === 1;
+
+/**REST tehtävän koodia */ 
+/** Usecurrency importattu */
   const { selectedCurrency, toggleCurrency } = useCurrency();
   const setCurrency = (currency) => {
     if (currency !== selectedCurrency) {toggleCurrency(currency);}
   };
+/**REST tehtävän koodia */
 
 
   const handleLogout = () => {
@@ -77,6 +83,8 @@ export const Navi = () => {
                 <Nav.Link href="/register" className="text-light">Rekisteröidy</Nav.Link>
               </>
             )}
+
+    {/**REST tehtävän koodia */} {/** Bootstrap dropdown menu valuuttavalinnalle  */}
           <Dropdown>
               <Dropdown.Toggle variant="gray"  id="dropdown-basic" style={{color:"white", width:"60px", height:"40px", marginTop:"0px", marginLeft:"5px"}} size="sm">
                 {selectedCurrency.toUpperCase()} {selectedCurrency === 'eur' ? ' €' : ' $'}
@@ -86,6 +94,8 @@ export const Navi = () => {
                 <Dropdown.Item onClick={() => setCurrency("usd")}>USD $</Dropdown.Item>
               </Dropdown.Menu>
           </Dropdown>
+    {/**REST tehtävän koodia */}
+
           </Nav>
         </Navbar.Collapse>
       </Container>

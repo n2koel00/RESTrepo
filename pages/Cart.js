@@ -1,20 +1,26 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Order } from "../components/Order";
 import { useLocation, useNavigate } from "react-router-dom";
+/**REST tehtävän koodia */
 import { useCurrency } from '../components/CurrencyContext';
+/**REST tehtävän koodia */
 import "./Cart.css";
 
 export const Cart = () => {
+
+/**REST tehtävän koodia */ 
+/** Usecurrency muokattu toimimaan Cart.js kanssa (oli vähän häikkää tuon item.nönnönöön kanssa)*/
   const { selectedCurrency } = useCurrency();
 
   const getPrice = useCallback((item) => {
     return selectedCurrency === 'usd' ? item.price_usd : item.price;
   }, [selectedCurrency]);
-
+/**REST tehtävän koodia */
 
   const [shoppingCart, setShoppingCart] = useState(
     JSON.parse(localStorage.getItem("shopping-cart")) || []
   );
+
   const [totalPrice, setTotalPrice] = useState(0);
   const params = useLocation();
   const navigate = useNavigate();
@@ -32,6 +38,9 @@ export const Cart = () => {
     });
   };
 
+
+/**REST tehtävän koodia */
+/** calculateTotalPrice liitetty getPrice  */
   useEffect(() => {
     const calculateTotalPrice = () => {
       const newTotalPrice = shoppingCart.reduce(
@@ -44,6 +53,8 @@ export const Cart = () => {
     localStorage.setItem("shopping-cart", JSON.stringify(shoppingCart));
     calculateTotalPrice();
   }, [shoppingCart, getPrice]);
+/**REST tehtävän koodia */
+
 
   useEffect(() => {
     if (params.state && params.state.product !== null) {
@@ -111,10 +122,15 @@ export const Cart = () => {
                 <button onClick={() => updateCount(item, 1)}>+</button>
               </div>
               <div>
+
+          {/**REST tehtävän koodia */}
+          {/*Ostoskorissa piti vähän manuaalisesti laskea */}
                 <span>
                   {(getPrice(item) * item.count).toFixed(2)}
                   {selectedCurrency === 'eur' ? ' €' : ' $'}
                 </span>
+          {/**REST tehtävän koodia */}
+
                 <button
                   style={{ marginTop: "5px" }}
                   onClick={() => removeItemFromCart(item)}
@@ -133,7 +149,11 @@ export const Cart = () => {
 
       {/* Display total price */}
       <div>
+
+    {/**REST tehtävän koodia */}
         Hinta Yhteensä: {totalPrice.toFixed(2)}{selectedCurrency === 'eur' ? ' €' : ' $'}
+    {/**REST tehtävän koodia */}
+
         <Order cart={shoppingCart} onSubmitOrder={handleOrderSubmit} />
       </div>
     </div>

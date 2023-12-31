@@ -1,9 +1,15 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { AddCart } from "./AddCart";
+  /**REST tehtävän koodia */
 import { useCurrency } from "./CurrencyContext";
+  /**REST tehtävän koodia */
+
 
 const ProductCard = ({ product, openModal }) => {
+  
+/**REST tehtävän koodia */
+/** useCurrency importattu CurrencyContext.js:tä */
   const { selectedCurrency } = useCurrency();
 
   const formatPrice = () => {
@@ -14,6 +20,7 @@ const ProductCard = ({ product, openModal }) => {
     }
     return "No price";
   };
+/**REST tehtävän koodia */
 
   return (
     <Card
@@ -40,7 +47,12 @@ const ProductCard = ({ product, openModal }) => {
         </Card.Title>
         <Card.Text></Card.Text>
         <Card.Text style={{ fontSize: "25px" }}>
+
+{/**REST tehtävän koodia */}
+{/** näyttää oikean hinnan oikealla valuutalla */}
           {formatPrice(product.price)}
+{/**REST tehtävän koodia */}
+
         </Card.Text>
         <AddCart product={product} key={product.id} />
         <Button

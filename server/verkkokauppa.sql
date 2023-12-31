@@ -1,22 +1,133 @@
--- Active: 1698938290511@@127.0.0.1@3306@verkkokauppa
-DROP TABLE IF EXISTS order_line;
-
-DROP TABLE IF EXISTS customer_order;
-
-DROP TABLE IF EXISTS customer;
+/**REST tehtävän koodia */
 
 DROP TABLE IF EXISTS product;
 
-DROP TABLE IF EXISTS product_category;
+DROP TABLE IF EXISTS price;
 
-DROP TABLE IF EXISTS palaute;
 
-DROP TABLE IF EXISTS customerfeedback;
+/* Yritys numero ?? saada valuuttavalinta toimimaan /pricesta tähän liittyi muutakin koodia mutta koska se ei päätynyt githubiin se on hukassa*/ 
+/*Alempana "product" jota päädyin käyttämään*/
 
 CREATE TABLE
-    product_category(
-        category_name VARCHAR(255) NOT NULL PRIMARY KEY,
-        category_description VARCHAR(500)
+        price(
+            id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            price DECIMAL(10, 2),
+            price_usd DECIMAL(10, 2)
+        )
+
+INSERT INTO 
+    price (
+        price,
+        price_usd
+        ) VALUES 
+        (
+        699.99,
+        753.99
+    ), (
+        149.99,
+        160.99
+    ), (
+        139.90,
+        150.99
+    ), (
+        189.99,
+        203.99
+    ), (
+        149.99,
+        161.99
+    ), (
+        189.90,
+        204.99
+    ), (
+        329.90,
+        355.99
+    ), (
+        499.99,
+        538.99
+    ), (
+        126.99,
+        135.99
+    ), (
+        144.99,
+        155.99
+    ), (
+        619.99,
+        667.99
+    ), (
+        269.99,
+        290.99
+    ), (
+        118.99,
+        127.99
+    ), (
+        369.99,
+        397.99
+    ), (
+        129.99,
+        139.99
+    ), (
+        164.99,
+        176.99
+    ), (
+        629.99,
+        678.99
+    ), (
+        309.99,
+        333.99
+    ), (
+        144.99,
+        155.99
+    ), (
+        439.99,
+        473.99
+    ), (
+        39.99,
+        42.99
+    ), (
+        114.90,
+        123.99
+    ), (
+        92.90,
+        100.99
+    ), (
+        85.90,
+        100.99
+    ), (
+        49.99,
+        52.99
+    ), (
+        1039.90,
+        1119.90
+    ), (
+        359.90,
+        387.99
+    ), (
+        679.90,
+        732.99
+    ), (
+        247.90,
+        267.99
+    ), (
+        61.90,
+        66.99
+    ), (
+        159.90,
+        172.99
+    ), (
+        66.90,
+        72.99
+    ), (
+        99.90,
+        107.99
+    ), (
+        254.90,
+        274.99
+    ), (
+        264.90,
+        285.99
+    ), (
+        374.90,
+        753.99
     );
 
 CREATE TABLE
@@ -27,84 +138,13 @@ CREATE TABLE
         product_description1 VARCHAR(500),
         product_description2 VARCHAR(500),
         product_description3 VARCHAR(500),
-        price DECIMAL(10, 2),
-        price_usd DECIMAL(10, 2),
+        price DECIMAL(10, 2),/**REST tehtävän koodia */
+        price_usd DECIMAL(10, 2),/**REST tehtävän koodia */
         image_url VARCHAR(255),
         category VARCHAR(255),
         FOREIGN KEY (category) REFERENCES product_category(category_name)
     );
 
-CREATE TABLE
-    palaute (
-        id INT PRIMARY KEY AUTO_INCREMENT,
-        tuote TEXT,
-        feedback TEXT,
-        submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-
-CREATE TABLE customer (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
-    username VARCHAR(255) UNIQUE,
-    email VARCHAR(255) UNIQUE, -- Add the email field
-    pw VARCHAR(255),
-    is_admin BOOLEAN DEFAULT false
-);
-
-
-/* INSERT INTO
-    customer (
-        first_name,
-        last_name,
-        username,
-        pw,
-        is_admin
-    )
-VALUES (
-        'Admin',
-        'User',
-        'admin_user',
-        'admin_password',
-        true
-    ); */
-
-CREATE TABLE
-    customer_order(
-        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        order_date DATETIME NOT NULL,
-        customer_id INT,
-        FOREIGN KEY (customer_id) REFERENCES customer(id)
-    );
-
-CREATE TABLE
-    order_line(
-        order_id INT,
-        product_id INT,
-        quantity INT,
-        PRIMARY KEY (order_id, product_id),
-        FOREIGN KEY (order_id) REFERENCES customer_order(id),
-        FOREIGN KEY (product_id) REFERENCES product(id)
-    );
-
-/*FEEDBACK SQL*/
-
-CREATE TABLE 
-    customerfeedback (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        email VARCHAR(255) NOT NULL,
-        nickname VARCHAR(255) NOT NULL,
-        feedback TEXT NOT NULL,
-        rating INT NOT NULL
-    );
-
-/*FEEDBACK SQL*/
-
-INSERT INTO product_category
-VALUES (
-        'Naytonohjaimet',
-        'AMD ja NVIDIA'
-    ), ('Emolevyt', 'AMD ja Intel'), ('Muistit', 'DDR4 ja DDR5'), ('Prosessorit', 'AMD ja Intel'), ('Kotelot', 'Torni ja Mini'), ('Virtalahteet', 'ATX ja mATX');
 
 INSERT INTO
     product (
@@ -113,8 +153,8 @@ INSERT INTO
         product_description1,
         product_description2,
         product_description3,
-        price,
-        price_usd,
+        price,/**REST tehtävän koodia */
+        price_usd,/**REST tehtävän koodia */
         image_url,
         category
     )
@@ -124,8 +164,8 @@ VALUES (
         'Muistia: 12 GB GDDR6X',
         'plaaplaa',
         'plaaplaa',
-        699.99,
-        753.99,
+        699.99, /**REST tehtävän koodia */
+        753.99, /**REST tehtävän koodia */
         'https://ic.jimms.fi/product/3/2/438137-ig800gg.jpg',
         'Naytonohjaimet'
     ), (
